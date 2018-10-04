@@ -1,0 +1,12 @@
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}
+
+.trial{
+  float:right;
+}
+
+.shiftRight{
+  padding-left: 30px;
+}

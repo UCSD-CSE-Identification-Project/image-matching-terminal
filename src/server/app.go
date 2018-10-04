@@ -45,16 +45,15 @@ func (a *App) Initialize(user, password, dbname string) {
 func (a *App) initializeRoutes() {
 
 	a.Router.HandleFunc("/login/add", a.addCredentials)
-	//a.Router.HandleFunc("/getTimes",a.getTimes)
 	a.Router.HandleFunc("/login/check", a.checkCredentials)
+	a.Router.HandleFunc("/uploadToDatabase", a.uploadToDatabase)
+
+
+  a.Router.HandleFunc("/strictMatches/getMatches", a.getStrictMatches)
+  a.Router.HandleFunc("/potentialTierOne/getMatches", a.getTierOneMatches)
+  a.Router.HandleFunc("/potentialTierTwo/getMatches", a.getTierTwoMatches)
 }
 
-/*
-func (a *App) getTimes(w http.ResponseWriter, r *http.Request)  {
-  var l loginCred
-  respondWithJSON(w,http.StatusOK, loginCred.getAllTimes())
-}
-*/
 func (a *App) Run(addr string) {
   //log.Fatal(http.ListenAndServe(":12345", handlers.CORS(handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD"}), handlers.AllowedOrigins([]string{"*"}))(a.Router)))
 
@@ -136,6 +135,66 @@ func (a *App) addCredentials(w http.ResponseWriter, r *http.Request) {
   }
 }
 
+
+func (a *App) uploadToDatabase(w http.ResponseWriter, r *http.Request){
+
+  contents, _ := ioutil.ReadAll(r.Body)
+  var u uploadData
+  json.Unmarshal(contents,&u)
+  log.Println(u.Link)
+
+  u.uploadToDatabase(a.DB)
+
+
+}
+
+func (a *App) getStrictMatches(w http.ResponseWriter, r *http.Request){
+  log.Println("inside strict matches")
+  contents, _ := ioutil.ReadAll(r.Body)
+  var key Keyobj // Do we need a struct json object for this?
+  json.Unmarshal(contents,&key)
+
+  matches := key.getStrictMatches(a.DB)
+  log.Println(matches)
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(http.StatusCreated)
+  json.NewEncoder(w).Encode(matches)
+
+  //respondWithJSON(w, http.StatusOK, matches)
+}
+
+func (a *App) getTierOneMatches(w http.ResponseWriter, r *http.Request){
+  contents, _ := ioutil.ReadAll(r.Body)
+  var key Keyobj // Do we need a struct json object for this?
+  json.Unmarshal(contents,&key)
+
+  matches := key.getPotentialTierOne(a.DB)
+  log.Println(matches)
+
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(http.StatusCreated)
+  json.NewEncoder(w).Encode(matches)
+
+  // respondWithJSON(w, http.StatusOK, matches)
+
+}
+
+func (a *App) getTierTwoMatches(w http.ResponseWriter, r *http.Request){
+  contents, _ := ioutil.ReadAll(r.Body)
+  var key Keyobj // Do we need a struct json object for this?
+  json.Unmarshal(contents,&key)
+  matches := key.getPotentialTierTwo(a.DB)
+  log.Println(matches)
+  w.Header().Set("Content-Type", "application/json")
+  w.WriteHeader(http.StatusCreated)
+  json.NewEncoder(w).Encode(matches)
+
+  //respondWithJSON(w, http.StatusOK, matches)
+
+}
+
+// HELPER FUNCTIONS ========================================================
+// =========================================================================
 func respondWithError(w http.ResponseWriter, code int, message string) {
 	respondWithJSON(w, code, map[string]string{"error": message})
 }

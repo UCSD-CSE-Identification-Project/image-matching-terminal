@@ -8,6 +8,14 @@ const routes: Routes = [
     // component: LoginPageComponent
     loadChildren: './login/login.module#LoginModule',
   },
+  {
+    path: 'upload-data',
+    loadChildren: './upload-data/upload-data.module#UploadDataModule'
+  },
+  {
+    path: 'match-terminal',
+    loadChildren: './match-terminal/match-terminal.module#MatchTerminalModule'
+  },
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ];
 
