@@ -1,0 +1,29 @@
+	<div class="col-sm-10 col-sm-offset-3">
+
+	  <!-- Search form -->
+	  <form class="form-horizontal" #uploadForm='ngForm'>
+        <h3>Upload Data</h3>
+          <mat-form-field class="shiftRightInputField">
+            <input matInput="text" name="link" [(ngModel)]="link" placeholder="Data" aria-label="Link">
+          </mat-form-field>
+          <button mat-flat-button type="submit" [disabled]="!uploadForm.form.valid" (click)="submit()">Submit</button>
+
+	  </form>
+	</div>
+
+
+
+<!-- button radio -->
+<div class="col-lg-2">
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-primary">
+      <input type="radio" name="options" id="option1" autocomplete="off" checked>
+      .txt
+    </label>
+    <label class="btn btn-primary">
+      <input type="radio" name="options" id="option2" autocomplete="off">
+      .xml
+    </label>
+  </div>
+</div>
+<!-- button radio -->

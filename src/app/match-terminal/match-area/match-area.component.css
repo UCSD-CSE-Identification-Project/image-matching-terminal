@@ -1,0 +1,36 @@
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
+}
+
+
+.selfDropdown{
+  display: block;
+  width: 100%;
+}
+
+.mat-menu-panel.dropdownWidth{
+  max-width: inherit;
+
+}
+
+.mat-menu-panel.dropdownWidth button{
+  max-width: inherit;
+  min-height: 300px;
+
+}
+
+.notification_row img{
+  width: 424px;
+  min-height: 300px;
+}
+
+.shiftRightInputField{
+  padding-right: 10px;
+}
+

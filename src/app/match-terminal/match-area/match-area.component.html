@@ -1,0 +1,117 @@
+<div class="col-sm-6">
+  <h3>Search Image</h3>
+  <!-- Search form -->
+  <form class="form-horizontal" #matchTerminal='ngForm'>
+        <mat-form-field class="shiftRightInputField">
+          <input matInput="text" name="imageName" [(ngModel)]="imageName" placeholder="Complete Image Name" aria-label="ImageName">
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" [disabled]="!matchTerminal.form.valid" (click)="submit(); displayPictures = !displayPictures;">Submit</button>
+
+  </form>
+
+  <img [src]="this.imageFolderPath + this.imageName" ng-show="working" width="50%" height="50%">
+</div>
+
+<div class="col-sm-6">
+  <h3>Display</h3>
+  <!--
+  <div class="dropdown dropdownMenu">
+    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButtonStrict" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+      Strict Matches
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonStrict">
+      <ul>
+        <li *ngFor="let hero of strictmatches$">
+          <a (click)="matchFound(hero);">
+            <img class="dropdown-item" [src]="this.imageFolderPath + hero" ng-show="working" width="50%" height="50%" >
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dropdown dropdownMenu">
+    <button class="btn btn-secondary btn-block btn dropdown-toggle" type="button" id="dropdownMenuButtonStrict" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+      Tier 1 Matches
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonStrict">
+      <ul>
+        <li *ngFor="let hero of tier1matches$">
+          <a (click)="matchFound(hero);">
+            <img class="dropdown-item" [src]="this.imageFolderPath + hero" ng-show="working" width="50%" height="50%" >
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dropdown dropdownMenu">
+    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButtonStrict" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+      Tier 2 Matches
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonStrict">
+      <ul>
+        <li *ngFor="let hero of tier2matches$">
+          <a (click)="matchFound(hero);">
+            <img class="dropdown-item" [src]="this.imageFolderPath + hero" ng-show="working" width="50%" height="50%" >
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    -->
+  <button mat-flat-button color="primary" class="selfDropdown" [matMenuTriggerFor]="menu">Strict Matches</button>
+  <mat-menu #menu="matMenu" class="dropdownWidth">
+    <button  mat-menu-item *ngFor="let hero of strictmatches$">
+      <div class="notification_row">
+        <a (click)="matchFound(hero);">
+          <img [src]="this.imageFolderPath + hero" width="50%" height="50%" >
+        </a>
+      </div>
+
+    </button>
+  </mat-menu>
+
+
+  <button mat-flat-button color="primary" class="selfDropdown" [matMenuTriggerFor]="menu1">Tier 1 Matches</button>
+  <mat-menu #menu1="matMenu" class="dropdownWidth">
+    <button  mat-menu-item *ngFor="let hero of tier1matches$">
+      <div class="notification_row">
+        <a (click)="matchFound(hero);">
+          <img [src]="this.imageFolderPath + hero" width="50%" height="50%" >
+        </a>
+      </div>
+
+    </button>
+  </mat-menu>
+
+
+  <button mat-flat-button color="primary" class="selfDropdown" [matMenuTriggerFor]="menu2"> Tier 2 Matches</button>
+  <mat-menu #menu2="matMenu" class="dropdownWidth">
+    <button  mat-menu-item *ngFor="let hero of tier2matches$">
+      <div class="notification_row">
+        <a (click)="matchFound(hero);">
+          <img [src]="this.imageFolderPath + hero" width="50%" height="50%" >
+        </a>
+      </div>
+
+    </button>
+  </mat-menu>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
